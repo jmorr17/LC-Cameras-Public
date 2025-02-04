@@ -20,6 +20,7 @@ jobs:
         run: |
           git config --local user.name "jmorr17"
           git config --local user.email "jmorris@lakecountyco.gov"
+          git config --global url."https://$GITHUB_TOKEN@github.com".insteadOf "https://github.com"  # Set the GitHub token for authentication
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -33,7 +34,7 @@ jobs:
 
       - name: Fetch and save snapshots from LC-Cameras
         run: |
-          git clone https://$GITHUB_TOKEN@github.com/jmorr17/LC-Cameras.git  # Clone the LC-Cameras repo with authentication
+          git clone https://github.com/jmorr17/LC-Cameras.git  # Clone the LC-Cameras repo with the token set up in git config
           cp -r LC-Cameras/snapshots/* snapshots/  # Copy the 'snapshots' folder from LC-Cameras to LC-Cameras-Public
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token for authentication
